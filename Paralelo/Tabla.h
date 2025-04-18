@@ -1,8 +1,7 @@
 #ifndef TABLA_H
 #define TABLA_H
 
-//#include "Nodos.h"
-Table *table;
+#include "Nodos.h"
 // Structure for the table
 typedef struct Table
 {
@@ -11,6 +10,7 @@ typedef struct Table
     unsigned long int bits; // Bit encoding
     struct Table *next;     // Puntero al siguiente nodo
 } Table;
+Table *table;
 
 // Crear una tabla de forma recursiva
 void createTable(Node *node, int nBits, int bits){
