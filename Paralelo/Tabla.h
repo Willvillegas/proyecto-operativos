@@ -1,8 +1,8 @@
 #ifndef TABLA_H
 #define TABLA_H
 
-#include "Nodos.h"
-
+//#include "Nodos.h"
+Table *table;
 // Structure for the table
 typedef struct Table
 {
