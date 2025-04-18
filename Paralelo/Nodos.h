@@ -8,7 +8,7 @@ typedef struct Node {
     unsigned char symbol;
     int count;
 }Node;
-
+void insertInOrder(Node **head, Node *element);  // 👈 Prototipo
 //void insertSymbol(Node *List, Node *element, Node *head, Node *aux);
 /*
     Function that insert a symbol in a list
@@ -67,10 +67,10 @@ static inline void sortList(Node **head){
     Salidas:
         - void
 */
-static inline void insertInOrder(Node **head, Node *element){
+void insertInOrder(Node **head, Node *element){
     Node *aux = NULL;
     Node *auxNext = NULL;
-    
+
     if(!*head){
         *head = element;
         (*head)->next = NULL;

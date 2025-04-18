@@ -10,7 +10,10 @@ typedef struct Table
     unsigned long int bits; // Bit encoding
     struct Table *next;     // Puntero al siguiente nodo
 } Table;
+
+//global variable
 Table *table;
+void insertElement(unsigned char c, int nBits, int bits); // 👈 Prototipo
 
 // Crear una tabla de forma recursiva
 static inline void createTable(Node *node, int nBits, int bits){
@@ -27,7 +30,7 @@ static inline void createTable(Node *node, int nBits, int bits){
 }
 
 // Inserta un elemento en la tabla
-static inline void insertElement(unsigned char c, int nBits, int bits){
+void insertElement(unsigned char c, int nBits, int bits){
     Table *t, *p, *a;
 
     t = (Table *) malloc( sizeof(Table) );
