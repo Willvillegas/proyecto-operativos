@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -I -pthread.
 
 # Archivos fuente y objetos
-COMPRESS_SRCS = compress.c Tabla.c Nodos.c
+COMPRESS_SRCS = compress.c 
 DECOMPRESS_SRCS = decompress.c
 
 COMPRESS_OBJS = $(COMPRESS_SRCS:.c=.o)

@@ -13,7 +13,7 @@ typedef struct Table
 Table *table;
 
 // Crear una tabla de forma recursiva
-void createTable(Node *node, int nBits, int bits){
+static inline void createTable(Node *node, int nBits, int bits){
     if (node->right)
         createTable(node->right, nBits + 1, (bits << 1) | 1);
     
@@ -27,7 +27,7 @@ void createTable(Node *node, int nBits, int bits){
 }
 
 // Inserta un elemento en la tabla
-void insertElement(unsigned char c, int nBits, int bits){
+static inline void insertElement(unsigned char c, int nBits, int bits){
     Table *t, *p, *a;
 
     t = (Table *) malloc( sizeof(Table) );
@@ -57,7 +57,7 @@ void insertElement(unsigned char c, int nBits, int bits){
 }
 
 // Buscar un simbolo en la tabla
-Table* findSymbol(Table *table, unsigned char symbol){
+static inline Table* findSymbol(Table *table, unsigned char symbol){
     Table *t = table;
     while (t && t->symbol != symbol){
         t = t->next;
@@ -66,7 +66,7 @@ Table* findSymbol(Table *table, unsigned char symbol){
 }
 
 // Destruir la tabla
-void destroyTable(Table *table){
+static inline void destroyTable(Table *table){
     Table *temp;
     while (table != NULL){
         temp = table;
@@ -74,7 +74,7 @@ void destroyTable(Table *table){
         free(temp);
     }
 }
-void printTable(Table *table){
+static inline void printTable(Table *table){
     Table *temp;
     temp = table;
     while (temp != NULL){

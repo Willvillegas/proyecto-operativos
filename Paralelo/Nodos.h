@@ -20,7 +20,7 @@ typedef struct Node {
     output
     none
 */
-void insertSymbol(Node *list, Node *element, Node *head, Node *aux){    
+static inline void insertSymbol(Node *list, Node *element, Node *head, Node *aux){    
     element->next = aux;
     if(!list) head = element;
     else list->next = element;
@@ -35,7 +35,7 @@ void insertSymbol(Node *list, Node *element, Node *head, Node *aux){
     output
     none
 */
-void insertNewSymbol(Node *actual, Node *next, Node *List, unsigned char c){
+static inline void insertNewSymbol(Node *actual, Node *next, Node *List, unsigned char c){
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->symbol = c;
     newNode->left = newNode->right = NULL;
@@ -45,7 +45,7 @@ void insertNewSymbol(Node *actual, Node *next, Node *List, unsigned char c){
     
 }
 // void sortList(Node **head);
-void sortList(Node **head){
+static inline void sortList(Node **head){
     Node *listAux;
     Node *aux;
     listAux = *head;
@@ -67,7 +67,7 @@ void sortList(Node **head){
     Salidas:
         - void
 */
-void insertInOrder(Node **head, Node *element){
+static inline void insertInOrder(Node **head, Node *element){
     Node *aux = NULL;
     Node *auxNext = NULL;
     
@@ -96,7 +96,7 @@ void insertInOrder(Node **head, Node *element){
         -void 
     
 */
-void freeNode(Node *head){
+static inline void freeNode(Node *head){
     if(head->left) freeNode(head->left);
     if(head->right) freeNode(head->right);
     free(head);
@@ -109,7 +109,7 @@ void freeNode(Node *head){
     Salidas:
         -void
 */
-void printNode(Node **head){
+static inline void printNode(Node **head){
     Node *aux;
     aux = *head;
     while(aux){
