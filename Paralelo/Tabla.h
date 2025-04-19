@@ -3,8 +3,7 @@
 
 #include "Nodos.h"
 // Structure for the table
-typedef struct Table
-{
+typedef struct Table{
     unsigned char symbol;   // Guarda el caracter de la tabla
     unsigned char nBits;    // Numero de bits guardados
     unsigned long int bits; // Bit encoding

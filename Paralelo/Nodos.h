@@ -11,14 +11,14 @@ typedef struct Node {
 void insertInOrder(Node **head, Node *element);  // 👈 Prototipo
 //void insertSymbol(Node *List, Node *element, Node *head, Node *aux);
 /*
-    Function that insert a symbol in a list
-    input
-    -list: Node * type, is the actual position in the list
-    -element: Node * type, is the element we want to insert
-    -head: Node * type, is the head of the list
-    -aux: Node * type, is the next node in the list
-    output
-    none
+    insertSymbol: Inserta un nuevo elemento en la lista
+    Entradas:
+        -list = Node* : Es la lista donde se va a insertar el nuevo elemento
+        -element = Node* : Elemento a insertar
+        -head = Node*: Es la cabeza de la lista
+        -aux = Node* : Es el siguiente elemento en la lista
+    Salidas:
+        void
 */
 static inline void insertSymbol(Node *list, Node *element, Node *head, Node *aux){    
     element->next = aux;
@@ -26,21 +26,21 @@ static inline void insertSymbol(Node *list, Node *element, Node *head, Node *aux
     else list->next = element;
 }
 /*
-    Function that inserts a new entry in a list
-    input
-    -actual: Node * type, this is the actual position in the list
-    -next: Node * type, this is the next position in the list
-    -List" Node * type, this is the head of the list
-    -c: unsigned char, this is the symbol that we are going to insert
-    output
-    none
+    inserNewSymbol: Inserta un nuevo simbolo en la lista
+    Entradas:
+        -actual = Node*: Es el nodo actual donde se va a insertar el nuevo simbolo
+        -next = Node*: Es el siguiente nodo en la lista
+        -list = Node*: Es la lista donde se va a insertar el nuevo simbolo
+        -c = unsigned char : Es el simbolo a insertar
+    Salidas:
+        void
 */
-static inline void insertNewSymbol(Node *actual, Node *next, Node *List, unsigned char c){
+static inline void insertNewSymbol(Node *actual, Node *next, Node *list, unsigned char c){
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->symbol = c;
     newNode->left = newNode->right = NULL;
     newNode-> count = 1;
-    insertSymbol(actual, newNode, List, next);
+    insertSymbol(actual, newNode, list, next);
 
     
 }
@@ -63,7 +63,7 @@ static inline void sortList(Node **head){
     inserInOrder: Función que inserta un elemento en una lista ordenada
     Entradas:
         -head = Node** : La cabeza de la lista
-        -element: Node*: El elemento a insertar en la lista
+        -element = Node*: El elemento a insertar en la lista
     Salidas:
         - void
 */

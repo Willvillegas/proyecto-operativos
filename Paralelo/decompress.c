@@ -213,8 +213,8 @@ int main(int argc, char* argv[]) {
     }
 
     if (argc == 2) {
-        printf("Directory argument not given using the default name: 'CompressedFile'\n");
-        directory = "CompressedFile";
+        printf("Directory argument not given using the default name: 'UnCompressedDirectory'\n");
+        directory = "UnCompressedDirectory";
     } else {
         directory = argv[2];
     }

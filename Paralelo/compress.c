@@ -76,8 +76,7 @@ void processDirectory(const char *directoryPath, Node** list) {
 
 void CountCharacter(Node **list, unsigned char character) {
   Node *current, *previous, *newNode;
-  if (!*list) // If the list is empty, create a new node as the head
-  {
+  if (!*list){ // If the list is empty, create a new node as the head 
     *list = (Node *)malloc(sizeof(Node)); // Create a new node
     (*list)->symbol = character;                  // Assign the character
     (*list)->count = 1; // Initialize the count to 1
@@ -214,6 +213,8 @@ void compress(const char *directoryPath) {
     }
 
     int fileIndex = 0;
+    pid_t *childPids = NULL;
+    int numChilds = 0;
 
     while ((entry = readdir(dp))) {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
@@ -222,23 +223,41 @@ void compress(const char *directoryPath) {
 
         char filePath[1024];
         snprintf(filePath, sizeof(filePath), "%s/%s", directoryPath, entry->d_name);
-
+        
+        // crea el fork 
         pid_t pid = fork();
         if (pid == 0) {
             // Proceso hijo: comprime y escribe en un archivo temporal
             compressFile(filePath, entry->d_name, &list, fileIndex);
             exit(0);
         } else if (pid > 0) {
-            // Proceso padre: esperar a que el proceso hijo termine
-            wait(NULL);
+            // // Proceso padre: esperar a que el proceso hijo termine
+            // wait(NULL);
+            childPids = (pid_t *)realloc(childPids, (numChilds + 1) * sizeof(pid_t));
+            if (childPids == NULL) {
+                perror("Error allocating memory for child PIDs");
+                closedir(dp);
+                exit(EXIT_FAILURE);
+            }
+            // Almacenar el PID del proceso hijo
+            childPids[numChilds++] = pid;
+            fileIndex++;
         } else {
             perror("Error al crear el proceso hijo");
+            closedir(dp);
+            free(childPids);  
             return;
         }
-        fileIndex++;
+        //fileIndex++;
     }
 
     closedir(dp);
+
+    // Esperar a que todos los procesos hijos terminen
+    for (int i = 0; i < numChilds; i++) {
+        waitpid(childPids[i], NULL, 0);
+    }
+    free(childPids);  // Liberar la memoria de los PIDs de los hijos
 }
 
 void appendTemporaryFilesToMain(int numFiles, FILE *outputFile) {
